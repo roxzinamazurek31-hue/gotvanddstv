@@ -133,10 +133,18 @@
     <form class="payment-form">
       <label for="smartcard-number">DStv smartcard / IUC number</label>
       <input id="smartcard-number" name="smartcard" type="text" inputmode="numeric" autocomplete="off" pattern="[0-9]+" required aria-describedby="payment-status" placeholder="Enter your number">
-      <button class="airtel-pay" type="submit">
-        <span class="airtel-mark" aria-hidden="true">A</span>
-        Pay with Airtel Money
-      </button>
+      <fieldset class="payment-methods">
+        <legend>Payment method</legend>
+        <label>
+          <input type="radio" name="paymentMethod" value="airtel-money" checked>
+          <span><strong>Airtel Money</strong></span>
+        </label>
+        <label>
+          <input type="radio" name="paymentMethod" value="mtn-money">
+          <span><strong>MTN MoMo</strong></span>
+        </label>
+      </fieldset>
+      <button class="airtel-pay" type="submit">Continue with Airtel Money</button>
       <p class="payment-status" id="payment-status" role="status" aria-live="polite"></p>
     </form>
   </dialog>
