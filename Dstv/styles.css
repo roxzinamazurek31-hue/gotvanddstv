@@ -1,0 +1,351 @@
+:root {
+  --blue: #007dc3;
+  --navy: #0b1d38;
+  --ink: #17243b;
+  --gold: #f7b500;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { font-family: Poppins, Arial, sans-serif; color: var(--ink); background: #fff; }
+
+.topbar {
+  height: 78px;
+  background: #fff;
+  border-bottom: 1px solid #e8edf2;
+  position: relative;
+  z-index: 20;
+}
+.topbar-inner {
+  max-width: 1320px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 26px;
+  display: flex;
+  align-items: center;
+}
+.icon-button { border: 0; background: transparent; cursor: pointer; }
+.menu-button { width: 30px; height: 30px; padding: 5px; margin-right: 20px; display: flex; flex-direction: column; justify-content: space-around; }
+.menu-button span { display: block; width: 19px; height: 2px; background: #26364d; }
+.brand { text-decoration: none; display: flex; align-items: baseline; margin-right: 62px; line-height: 1; }
+.brand-d { color: #0a73b7; font-family: Georgia, serif; font-size: 41px; font-weight: 700; font-style: italic; letter-spacing: -8px; margin-right: 8px; }
+.brand-stv { color: #0a73b7; font-size: 27px; font-weight: 700; letter-spacing: -2px; }
+.main-nav { display: flex; align-items: center; height: 100%; gap: 34px; }
+.main-nav a, .signin { color: #20304a; text-decoration: none; font-size: 14px; font-weight: 500; }
+.main-nav a:hover { color: var(--blue); }
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+.country { border: 0; background: transparent; color: #566276; font-size: 13px; font-family: inherit; cursor: pointer; }
+.country span { margin-left: 5px; }
+.search { width: 24px; height: 24px; border: 0; background: transparent; padding: 2px; cursor: pointer; }
+.search svg { width: 20px; fill: none; stroke: #26364d; stroke-width: 1.8; }
+.signin { color: #0d75af; font-weight: 600; }
+
+.hero {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  background: #111d2d url("https://www.dstv.com/media/fsunsodd/dstv_web-billboard_5760x3240-2.jpg?width=1600") center 44% / cover no-repeat;
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5,16,31,.78) 0%, rgba(5,16,31,.22) 44%, rgba(5,16,31,0) 70%);
+}
+.hero-inner {
+  max-width: 1320px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 26px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.hero-copy { color: #fff; margin-top: -6px; width: 520px; }
+.hero-copy h1 { margin: 0 0 8px; font-size: 42px; line-height: 1.08; letter-spacing: -.8px; }
+.hero-copy p { margin: 0 0 24px; font-size: 18px; }
+.learn-btn {
+  display: inline-flex;
+  height: 44px;
+  min-width: 142px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: #fff;
+  color: #1a2a40;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.packages {
+  max-width: 1320px;
+  margin: 0 auto;
+  margin-top: -58px;
+  padding: 20px 26px 70px;
+  position: relative;
+  z-index: 5;
+  scroll-margin-top: 0;
+}
+.packages h2 {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 25px;
+  line-height: 1.2;
+  color: #17243b;
+  letter-spacing: .2px;
+}
+.tabs { display: flex; justify-content: center; margin-bottom: 28px; }
+.tabs button {
+  height: 43px;
+  min-width: 160px;
+  border: 1px solid #cbd4df;
+  border-bottom: 3px solid transparent;
+  background: #fff;
+  color: #66748a;
+  font: 600 13px Poppins, sans-serif;
+  cursor: pointer;
+}
+.tabs button:first-child { border-radius: 4px 0 0 4px; }
+.tabs button:last-child { border-radius: 0 4px 4px 0; }
+.tabs button.active { color: #17243b; border-bottom-color: var(--blue); }
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 5px;
+}
+.package-card {
+  background: #fff;
+  border: 1px solid #dde4ec;
+  border-radius: 2px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(25,52,82,.04);
+}
+.card-head {
+  height: 142px;
+  background: #f0f3f7;
+  border-bottom: 1px solid #dfe5ec;
+  padding: 13px 20px 14px;
+  position: relative;
+  cursor: pointer;
+}
+.package-card.premium .card-head { background: #f5f7fa; }
+.badge {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  color: #7e8998;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.head-main { display: flex; align-items: center; justify-content: space-between; height: 90px; }
+.price { display: flex; align-items: flex-start; color: #17243b; white-space: nowrap; }
+.price sup { font-size: 15px; margin-top: 12px; margin-right: 3px; }
+.price strong { font-size: 43px; line-height: 1; letter-spacing: -2px; }
+.price sub { font-size: 13px; align-self: flex-end; margin: 0 0 8px 5px; }
+.channel-bubbles { display: flex; align-items: center; margin-left: 8px; }
+.channel-bubbles img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: contain;
+  background: #fff;
+  margin-left: -8px;
+  padding: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.count {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #17243b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  margin-left: -8px;
+  font-weight: 600;
+}
+.chevron { color: #6e7b8d; font-size: 28px; line-height: 1; margin-left: 8px; }
+.card-body { flex: 1; padding: 17px 28px 14px 30px; }
+.card-body ul { margin: 0; padding: 0; list-style: none; }
+.card-body li { position: relative; padding: 5px 0 5px 14px; font-size: 13px; line-height: 1.45; color: #27364b; }
+.card-body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.card-foot { height: 58px; display: flex; align-items: center; border-top: 1px solid #edf0f4; padding: 8px 14px; }
+.sign-btn {
+  width: 94px;
+  height: 40px;
+  border: 0;
+  border-radius: 3px;
+  background: #f4f6f8;
+  color: #7a8492;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 13px Poppins, sans-serif;
+  cursor: pointer;
+}
+.channels-btn {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #536177;
+  font: 600 12px Poppins, sans-serif;
+  cursor: pointer;
+}
+.channels-btn span { font-size: 22px; margin-left: 5px; vertical-align: -2px; }
+
+.payment-dialog {
+  width: min(440px, calc(100% - 32px));
+  border: 0;
+  border-radius: 10px;
+  padding: 32px;
+  color: var(--ink);
+  box-shadow: 0 18px 60px rgba(8, 24, 45, .28);
+}
+.payment-dialog::backdrop { background: rgba(8, 20, 38, .62); }
+.payment-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: 0;
+  background: transparent;
+  color: #637087;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.payment-eyebrow {
+  margin: 0 0 6px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+}
+.payment-dialog h2 { margin: 0; font-size: 23px; }
+.selected-plan { margin: 8px 0 24px; color: #66748a; font-size: 14px; }
+.payment-form label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.payment-form input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #cbd4df;
+  border-radius: 4px;
+  padding: 0 12px;
+  color: var(--ink);
+  font: 14px Poppins, sans-serif;
+}
+.payment-form input:focus { outline: 2px solid rgba(0, 125, 195, .25); border-color: var(--blue); }
+.airtel-pay {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 4px;
+  background: #e52330;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: 600 14px Poppins, sans-serif;
+  cursor: pointer;
+}
+.airtel-mark {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.payment-status { min-height: 0; margin: 12px 0 0; color: #a51f2b; font-size: 12px; line-height: 1.5; }
+
+.chat-button {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: #1998d5;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+  cursor: pointer;
+  z-index: 30;
+}
+.chat-button svg { width: 38px; fill: #fff; }
+.chat-button circle { fill: #1998d5; }
+
+.menu-drawer {
+  display: none;
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 290px;
+  background: #fff;
+  z-index: 100;
+  box-shadow: 8px 0 30px rgba(0,0,0,.18);
+  padding: 70px 30px;
+}
+.menu-drawer.open { display: flex; flex-direction: column; }
+.menu-drawer a { color: #17243b; text-decoration: none; font-size: 18px; padding: 14px 0; border-bottom: 1px solid #edf0f4; }
+.close-menu { position: absolute; right: 18px; top: 14px; border: 0; background: transparent; font-size: 32px; color: #26364d; cursor: pointer; }
+
+@media (max-width: 900px) {
+  main { display: flex; flex-direction: column; }
+  .packages { order: 1; margin-top: 0; padding: 20px 16px 50px; }
+  .hero { order: 2; }
+  .topbar { height: 64px; }
+  .topbar-inner { padding: 0 16px; }
+  .brand { margin-right: 0; }
+  .brand-d { font-size: 34px; }
+  .brand-stv { font-size: 23px; }
+  .main-nav { display: none; }
+  .header-actions { gap: 14px; }
+  .country { display: none; }
+  .signin { font-size: 12px; }
+  .hero { height: 420px; background-position: 62% center; }
+  .hero-shade { background: linear-gradient(90deg, rgba(5,16,31,.72), rgba(5,16,31,.08)); }
+  .hero-inner { padding: 0 24px; align-items: flex-end; padding-bottom: 44px; }
+  .hero-copy h1 { font-size: 34px; }
+  .hero-copy p { font-size: 16px; }
+  .package-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .package-card { min-height: 390px; }
+  .tabs { overflow: hidden; }
+  .tabs button { flex: 1; min-width: 0; }
+}
+
+@media (max-width: 520px) {
+  .menu-button { margin-right: 12px; }
+  .hero { height: 390px; background-position: 58% center; }
+  .hero-inner { padding-bottom: 36px; }
+  .hero-copy { width: 100%; }
+  .hero-copy h1 { font-size: 30px; max-width: 290px; }
+  .packages h2 { font-size: 20px; }
+  .card-head { padding-left: 16px; padding-right: 16px; }
+  .channel-bubbles img { width: 42px; height: 42px; }
+  .count { width: 44px; height: 44px; }
+}

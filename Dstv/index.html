@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en-zm">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get the latest Sport, Movies, Series and Shows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-button menu-button" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="brand" href="#" aria-label="DStv home">
+        <span class="brand-d">D</span><span class="brand-stv">Stv</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#">Explore</a>
+        <a href="#">Buy</a>
+        <a href="#">Watch</a>
+        <a href="#">My Account</a>
+      </nav>
+      <div class="header-actions">
+        <button class="country" aria-label="Country selector">Zambia <span>⌄</span></button>
+        <button class="search" aria-label="Search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg>
+        </button>
+        <a class="signin" href="#">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-shade"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>Expect more. Expect +</h1>
+          <p>New DStv packages available now</p>
+          <a class="learn-btn" href="#plans">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="packages" id="packages">
+      <h2>CHECK OUT OUR NEW PACKAGES</h2>
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="decoder">Decoder Packages</button>
+        <button role="tab" class="active" data-tab="stream">Stream Packages</button>
+      </div>
+
+      <div class="package-grid" id="plans">
+        <article class="package-card premium" data-kind="stream">
+          <div class="card-head plan-select" role="button" tabindex="0" aria-label="Select Starter plan" data-plan="Starter" data-price="100">
+            <div class="badge">DStv Stream</div>
+            <div class="head-main">
+              <div class="price"><sup>K</sup><strong>100</strong><sub>pm</sub></div>
+              <div class="channel-bubbles">
+                <img src="https://www.dstv.com/media/msfbplrn/bbc-uktv-logo-white.png" alt="">
+                <img src="https://www.dstv.com/media/rrkk4wdc/bravo_2025_logo_320x320.png" alt="">
+                <img src="https://www.dstv.com/media/l52jbzbv/163-wethu.png" alt="">
+                <span class="count">59+</span>
+                <span class="chevron">›</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Movies, Music &amp; Entertainment</li>
+              <li>Local favourites</li>
+              <li>Wethu+ and Supersport Kickoff</li>
+              <li>M-Net Legends</li>
+              <li>National Geographic Wild</li>
+            </ul>
+          </div>
+          <div class="card-foot">
+            <button type="button" class="sign-btn" data-plan="Starter" data-price="100">Sign Up</button>
+            <button class="channels-btn" data-card="Starter">59 Channels <span>›</span></button>
+          </div>
+        </article>
+
+        <article class="package-card" data-kind="stream">
+          <div class="card-head plan-select" role="button" tabindex="0" aria-label="Select Compact plan" data-plan="Compact" data-price="200">
+            <div class="badge">DStv Stream</div>
+            <div class="head-main">
+              <div class="price"><sup>K</sup><strong>200</strong><sub>pm</sub></div>
+              <div class="channel-bubbles">
+                <img src="https://www.dstv.com/media/tichcdeb/106-m-movies-plus.png" alt="">
+                <img src="https://www.dstv.com/media/fv1o0pcm/130-mtv-light.png" alt="">
+                <img src="https://www.dstv.com/media/mrsnwvts/mzansi-magic_400x400.png" alt="">
+                <span class="count">100+</span>
+                <span class="chevron">›</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Lifestyle, music and documentaries</li>
+              <li>Selected Premier League &amp; Champions League</li>
+              <li>More kids, movies, series, dramas and novellas</li>
+              <li>M-Net Movies+, Stars &amp; Legends</li>
+              <li>Nickelodeon</li>
+              <li>WWE wrestling 24/7 channel</li>
+            </ul>
+          </div>
+          <div class="card-foot">
+            <button type="button" class="sign-btn" data-plan="Compact" data-price="200">Sign Up</button>
+            <button class="channels-btn" data-card="Compact">100 Channels <span>›</span></button>
+          </div>
+        </article>
+
+        <article class="package-card" data-kind="stream">
+          <div class="card-head plan-select" role="button" tabindex="0" aria-label="Select Premium plan" data-plan="Premium" data-price="300">
+            <div class="badge">DStv Stream</div>
+            <div class="head-main">
+              <div class="price"><sup>K</sup><strong>300</strong><sub>pm</sub></div>
+              <div class="channel-bubbles">
+                <img src="https://www.dstv.com/media/mhapeyyl/ss_psl.png" alt="">
+                <img src="https://www.dstv.com/media/puxctgsq/ss_premier-league.png" alt="">
+                <img src="https://www.dstv.com/media/fsmkqhfo/ss_laliga.png" alt="">
+                <span class="count">109+</span>
+                <span class="chevron">›</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>All football from the world's top leagues</li>
+              <li>WWE &amp; UFC</li>
+              <li>International movies and series</li>
+              <li>The best of local entertainment</li>
+              <li>Kids and educational channels</li>
+            </ul>
+          </div>
+          <div class="card-foot">
+            <button type="button" class="sign-btn" data-plan="Premium" data-price="300">Sign Up</button>
+            <button class="channels-btn" data-card="Premium">109 Channels <span>›</span></button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="payment-dialog" aria-labelledby="payment-title">
+    <button class="payment-close" type="button" aria-label="Close payment form">×</button>
+    <p class="payment-eyebrow">DStv Zambia</p>
+    <h2 id="payment-title">Activate your plan</h2>
+    <p class="selected-plan"></p>
+    <form class="payment-form">
+      <label for="smartcard-number">DStv smartcard / IUC number</label>
+      <input id="smartcard-number" name="smartcard" type="text" inputmode="numeric" autocomplete="off" pattern="[0-9]+" required aria-describedby="payment-status" placeholder="Enter your number">
+      <button class="airtel-pay" type="submit">
+        <span class="airtel-mark" aria-hidden="true">A</span>
+        Pay with Airtel Money
+      </button>
+      <p class="payment-status" id="payment-status" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <button class="chat-button" aria-label="Chat with us">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M24 5C13.5 5 5 12.2 5 21c0 5.2 3 9.8 7.7 12.7L10 41l8.2-4.1c1.8.5 3.7.8 5.8.8 10.5 0 19-7.2 19-16S34.5 5 24 5z"></path>
+      <circle cx="16" cy="21" r="2"></circle><circle cx="24" cy="21" r="2"></circle><circle cx="32" cy="21" r="2"></circle>
+    </svg>
+  </button>
+
+  <div class="menu-drawer" aria-hidden="true">
+    <button class="close-menu" aria-label="Close menu">×</button>
+    <a href="#">Explore</a><a href="#">Buy</a><a href="#">Watch</a><a href="#">My Account</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
