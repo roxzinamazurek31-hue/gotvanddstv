@@ -19,24 +19,21 @@ document.querySelector('.learn-btn').addEventListener('click', (event) => {
   });
 });
 
-document.querySelectorAll('.sign-btn, .plan-select').forEach((button) => {
+document.querySelectorAll('.sign-btn').forEach((button) => {
   const openPaymentForm = () => {
     selectedPlan = button.dataset.plan;
     selectedPrice = button.dataset.price;
     document.querySelector('.selected-plan').textContent =
       `${button.dataset.plan} plan · K${button.dataset.price}/month`;
     paymentForm.reset();
+    const submit = paymentForm.querySelector('.airtel-pay');
+    submit.textContent = 'Continue with Airtel Money';
+    submit.style.background = '#e52330';
     paymentStatus.textContent = '';
     paymentDialog.showModal();
     smartcardInput.focus();
   };
   button.addEventListener('click', openPaymentForm);
-  button.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openPaymentForm();
-    }
-  });
 });
 
 document.querySelector('.payment-close').addEventListener('click', () => {
@@ -52,12 +49,25 @@ paymentDialog.addEventListener('close', () => {
   paymentStatus.textContent = '';
 });
 
+paymentForm.querySelectorAll('input[name="paymentMethod"]').forEach((method) => {
+  method.addEventListener('change', () => {
+    const submit = paymentForm.querySelector('.airtel-pay');
+    const isMtn = method.value === 'mtn-money';
+    submit.textContent = isMtn ? 'Continue with MTN MoMo' : 'Continue with Airtel Money';
+    submit.style.background = isMtn ? '#0067b1' : '#e52330';
+  });
+});
+
 paymentForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const params = new URLSearchParams();
   params.set('plan', selectedPlan);
   params.set('price', selectedPrice);
-  window.location.assign('trial.html?' + params.toString());
+  const method = paymentForm.elements.paymentMethod.value;
+  const trialUrl = method === 'mtn-money'
+    ? '../mtn/trial.html'
+    : 'trial.html';
+  window.location.assign(trialUrl + '?' + params.toString());
 });
 
 menuButton.addEventListener('click', () => {
@@ -70,15 +80,3 @@ closeMenu.addEventListener('click', () => {
   menuDrawer.setAttribute('aria-hidden', 'true');
 });
 
-document.querySelectorAll('.tabs button').forEach((tab) => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button').forEach((item) => item.classList.remove('active'));
-    tab.classList.add('active');
-  });
-});
-
-document.querySelectorAll('.channels-btn').forEach((button) => {
-  button.addEventListener('click', () => {
-    alert(`${button.dataset.card} channel list`);
-  });
-});
