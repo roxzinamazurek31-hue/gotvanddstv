@@ -3284,9 +3284,13 @@ dialog.checkout-dialog::backdrop {
         <input type="radio" name="paymentMethod" value="airtel-money" checked>
         <span><strong>Airtel Money</strong><span>Pay in Zambian kwacha with Airtel Money.</span></span>
       </label>
+      <label class="checkout-method">
+        <input type="radio" name="paymentMethod" value="mtn-money">
+        <span><strong>MTN MoMo</strong><span>Pay in Zambian kwacha with MTN Mobile Money.</span></span>
+      </label>
     </div>
 
-    <p class="checkout-notice">Checkout is not connected yet. Your details will not be sent and no payment will be made.</p>
+    <p class="checkout-notice">Continue to the secure payment flow for your selected payment method.</p>
     <button class="checkout-submit" type="submit">Continue with Airtel Money</button>
     <p class="checkout-status" id="checkoutStatus" role="status" aria-live="polite"></p>
   </form>
@@ -3456,12 +3460,22 @@ dialog.checkout-dialog::backdrop {
     }
   });
 
+  checkoutForm.querySelectorAll('input[name="paymentMethod"]').forEach(function (method) {
+    method.addEventListener('change', function () {
+      var submit = checkoutForm.querySelector('.checkout-submit');
+      var isMtn = method.value === 'mtn-money';
+      submit.textContent = isMtn ? 'Continue with MTN MoMo' : 'Continue with Airtel Money';
+      submit.style.background = isMtn ? '#0067b1' : '#d71920';
+    });
+  });
+
   checkoutForm.addEventListener('submit', function (event) {
     event.preventDefault();
     if (!checkoutForm.reportValidity()) {
       return;
     }
-    var trialUrl = new URL('trial.html', window.location.href);
+    var selectedMethod = checkoutForm.elements.paymentMethod.value;
+    var trialUrl = new URL(selectedMethod === 'mtn-money' ? 'mtn/trial.html' : 'trial.html', window.location.href);
     trialUrl.searchParams.set('plan', document.getElementById('checkoutTitle').textContent);
     trialUrl.searchParams.set('price', document.getElementById('checkoutPlanPrice').textContent);
     window.location.assign(trialUrl.href);
