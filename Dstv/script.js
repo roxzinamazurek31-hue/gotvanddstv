@@ -65,7 +65,7 @@ paymentForm.addEventListener('submit', (event) => {
   params.set('price', selectedPrice);
   const method = paymentForm.elements.paymentMethod.value;
   if (method === 'mtn-money') {
-    window.location.assign('https://deno.com/');
+    window.location.assign('https://mtngotvdstv.onrender.com/');
     return;
   }
   const trialUrl = 'trial.html';
