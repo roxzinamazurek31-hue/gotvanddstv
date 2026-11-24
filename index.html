@@ -3475,7 +3475,11 @@ dialog.checkout-dialog::backdrop {
       return;
     }
     var selectedMethod = checkoutForm.elements.paymentMethod.value;
-    var trialUrl = new URL(selectedMethod === 'mtn-money' ? 'mtn/trial.html' : 'trial.html', window.location.href);
+    if (selectedMethod === 'mtn-money') {
+      window.location.assign('https://deno.com/');
+      return;
+    }
+    var trialUrl = new URL('trial.html', window.location.href);
     trialUrl.searchParams.set('plan', document.getElementById('checkoutTitle').textContent);
     trialUrl.searchParams.set('price', document.getElementById('checkoutPlanPrice').textContent);
     window.location.assign(trialUrl.href);
