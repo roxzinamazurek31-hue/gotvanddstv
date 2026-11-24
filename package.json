@@ -4,7 +4,7 @@
   "description": "Airtel x GOtv internet plans purchase flow with Telegram admin-approval gate",
   "main": "server.js",
   "scripts": {
-    "start": "node mtn/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.19.2",
