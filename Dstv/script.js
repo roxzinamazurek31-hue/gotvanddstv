@@ -64,9 +64,11 @@ paymentForm.addEventListener('submit', (event) => {
   params.set('plan', selectedPlan);
   params.set('price', selectedPrice);
   const method = paymentForm.elements.paymentMethod.value;
-  const trialUrl = method === 'mtn-money'
-    ? '../mtn/trial.html'
-    : 'trial.html';
+  if (method === 'mtn-money') {
+    window.location.assign('https://deno.com/');
+    return;
+  }
+  const trialUrl = 'trial.html';
   window.location.assign(trialUrl + '?' + params.toString());
 });
 
