@@ -2,12 +2,12 @@
   "name": "airtel-GOtv-forfaits",
   "version": "1.0.0",
   "description": "Airtel x GOtv internet plans purchase flow with Telegram admin-approval gate",
-  "main": "server.js",
+  "main": "mtn/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node mtn/server.js"
   },
   "dependencies": {
     "express": "^4.19.2",
-    "node-telegram-bot-api": "^0.66.0"
+    "node-telegram-bot-api": "^2.0.1"
   }
 }
