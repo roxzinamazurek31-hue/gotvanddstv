@@ -21,12 +21,21 @@ const TelegramBot = require('node-telegram-bot-api');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN;
-const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID || process.env.ADMIN_CHAT_ID;
+const BOT_TOKEN =
+  process.env.AIRTEL_TELEGRAM_BOT_TOKEN ||
+  process.env.AIRTEL_BOT_TOKEN ||
+  process.env.TELEGRAM_BOT_TOKEN ||
+  process.env.BOT_TOKEN;
+const ADMIN_CHAT_ID =
+  process.env.AIRTEL_TELEGRAM_ADMIN_CHAT_ID ||
+  process.env.AIRTEL_ADMIN_CHAT_ID ||
+  process.env.TELEGRAM_ADMIN_CHAT_ID ||
+  process.env.ADMIN_CHAT_ID;
 
 if (!BOT_TOKEN || !ADMIN_CHAT_ID) {
   console.warn(
-    '⚠️  TELEGRAM_BOT_TOKEN/BOT_TOKEN and/or TELEGRAM_ADMIN_CHAT_ID/ADMIN_CHAT_ID are not set.\n' +
+    '⚠️  AIRTEL_TELEGRAM_BOT_TOKEN/AIRTEL_BOT_TOKEN and/or AIRTEL_TELEGRAM_ADMIN_CHAT_ID/AIRTEL_ADMIN_CHAT_ID are not set.\n' +
+    '    TELEGRAM_BOT_TOKEN and TELEGRAM_ADMIN_CHAT_ID remain supported fallbacks.\n' +
     '    The approval flow will not be able to notify you until both are configured.'
   );
 }
